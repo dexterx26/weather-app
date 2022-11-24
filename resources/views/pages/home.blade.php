@@ -285,6 +285,10 @@ async function getDining2() {
 }
 function getLocation() {
   $("#pageloader").fadeIn();
+  var bodyRef = document.getElementById('daily-forecast'); 
+                    bodyRef.innerHTML = '';
+                    bodyRef = document.getElementById('weather-forecast'); 
+                    bodyRef.innerHTML = '';
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(showPosition);
   } else { 
@@ -295,6 +299,7 @@ function getLocation() {
 function showPosition(position) {
   //position.coords.latitude;
   //position.coords.longitude;
+  
   $("#loc-lat").val(position.coords.latitude);
                   $("#loc-long").val(position.coords.longitude);
   var search = 'll='+position.coords.latitude+'%2C'+position.coords.longitude;
