@@ -289,7 +289,9 @@ function getLocation() {
                     bodyRef.innerHTML = '';
                     bodyRef = document.getElementById('weather-forecast'); 
                     bodyRef.innerHTML = '';
-                    
+                     
+
+                     
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(showPosition);
   } else { 
