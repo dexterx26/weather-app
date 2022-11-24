@@ -178,13 +178,10 @@ h6{
 </style>
         <div id="main-div" style="width:50vw;height:20vh; margin: auto; background: rgba(0, 0, 0, 0.5);border-radius:15px;padding:2%">
           <div class="card-body" style="width:100%;height:auto">
-            <form>
-            <input  class="form-control" type="text" id="query" name="query" onkeyup="chk_me()" style="border-radius:15px;border: 0;
-            outline: 0;
-            
-            border-bottom: 1px solid black; " placeholder="search a city" > 
-            <div id="searchlist" class="autocomplete-list" style="position: absolute;"></div><br><center><button class='btn btn-secondary' style="float:right" onclick="getLocation()">Get my location's status</button></center>  
-              <center><button hidden class="btn " style="background: rgba(255, 255, 255, 0.5);" id="search" onclick="search()"><i class="fas fa-search" style="color:white"></i></button></center>
+            <form><center><button class='btn btn-secondary' style="float:right;margin-top:-10px" onclick="getLocation()">Get my location's status</button></center>  
+              
+            <input  class="form-control" type="text" id="query" name="query" onkeyup="chk_me()" style="border-radius:15px;border: 0;outline: 0;border-bottom: 1px solid black; " placeholder="search a city" > 
+            <div id="searchlist" class="autocomplete-list" style="position: absolute;"></div><br><center><button hidden class="btn " style="background: rgba(255, 255, 255, 0.5);" id="search" onclick="search()"><i class="fas fa-search" style="color:white"></i></button></center>
           </div>
           
           <button class="btn  btn-primary  mt-3" id="modal_view_left" data-toggle="modal"  data-target="#left-modal" hidden>Open left modal</button>
@@ -193,7 +190,7 @@ h6{
         <div id="div-weather" style="display:none" class="weather-margin-top5">
        
         <button class="btn btn-primary" onclick="getDining(13000)" href="#">Dining</button><button class="btn btn-primary" onclick="getDining(16000)" href="#">Landmarks</button><button class="btn btn-primary" onclick="getDining(14000)" href="#">Events</button><button class="btn btn-primary" onclick="getDining(14000)" href="#">Retail</button>
-          
+          <br>
           <center>
           
           <h1 id="location" class="weather-margin-top5" style="color:white"></h1>
