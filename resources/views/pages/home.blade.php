@@ -178,83 +178,52 @@ h6{
 </style>
         <div id="main-div" style="width:50vw;height:20vh; margin: auto; background: rgba(0, 0, 0, 0.5);border-radius:15px;padding:2%">
           <div class="card-body" style="width:100%;height:auto">
-            <form><center><button class='btn btn-secondary' style="float:right;margin-top:-10px" onclick="getLocation()">Get my location's status</button></center>  
-              
+            <form><center><button class='btn btn-secondary' style="float:right;margin-top:-10px" onclick="getLocation()">Get my location's status</button></center>                
             <input  class="form-control" type="text" id="query" name="query" onkeyup="chk_me()" style="border-radius:15px;border: 0;outline: 0;border-bottom: 1px solid black; " placeholder="search a city" > 
             <div id="searchlist" class="autocomplete-list" style="position: absolute;"></div><br><center><button hidden class="btn " style="background: rgba(255, 255, 255, 0.5);" id="search" onclick="search()"><i class="fas fa-search" style="color:white"></i></button></center>
-          </div>
-          
+          </div>          
           <button class="btn  btn-primary  mt-3" id="modal_view_left" data-toggle="modal"  data-target="#left-modal" hidden>Open left modal</button>
-          <input type="text" id="loc-lat" value="34.752" hidden><input type="text" id="loc-long" value="135.4582" hidden>
-          
-        <div id="div-weather" style="display:none" class="weather-margin-top5">
-       
-        <button class="btn btn-primary" onclick="getDining(13000)" href="#">Dining</button><button class="btn btn-primary" onclick="getDining(16000)" href="#">Landmarks</button><button class="btn btn-primary" onclick="getDining(14000)" href="#">Events</button><button class="btn btn-primary" onclick="getDining(14000)" href="#">Retail</button>
-          <br>
-          <center>
-          
-          <h1 id="location" class="weather-margin-top5" style="color:white"></h1>
-          <h1 id="location-id" hidden></h1>
-          
-          <img id="img-weather" style="width:5vw;height:10vh" src="first.jpg" alt="Insert link 1 alt text here" class="responsive" /></center>
+          <input type="text" id="loc-lat" value="34.752" hidden><input type="text" id="loc-long" value="135.4582" hidden>          
+          <div id="div-weather" style="display:none" class="weather-margin-top5">       
+            <button class="btn btn-primary" onclick="getDining(13000)" href="#">Dining</button><button class="btn btn-primary" onclick="getDining(16000)" href="#">Landmarks</button><button class="btn btn-primary" onclick="getDining(14000)" href="#">Events</button><button class="btn btn-primary" onclick="getDining(14000)" href="#">Retail</button>
+            <br>
+            <center>          
+            <h1 id="location" class="weather-margin-top5" style="color:white"></h1>
+            <h1 id="location-id" hidden></h1>          
+            <img id="img-weather" style="width:5vw;height:10vh" src="first.jpg" alt="Insert link 1 alt text here" class="responsive" /></center>
             <div style="float:left;color:white;">
-            <h1 class="weather-margin-top2" id="location-weather"></h1>
+              <h1 class="weather-margin-top2" id="location-weather"></h1>
             </div>
             <div style="float:right;color:white;" class="weather-margin-top5">
               <center>
-              <h6 id="location-heat-index"></h6>
-              <h6 id="location-humidity"></h6>  
-              <h6 id="location-wind-speed"></h6></center>
+                <h6 id="location-heat-index"></h6>
+                <h6 id="location-humidity"></h6>  
+                <h6 id="location-wind-speed"></h6>
+              </center>
             </div>
             <div style="clear:both"></div>
             <div style="color:white">
-              <center><h5>Weather forecast</h5> </center>
+              <center><h5>Weather forecast</h5></center>
               <hr>
               <div id="weather-forecast">
-              </div>
-
-              
+              </div>              
               <center><h5>Daily forecast</h5> </center>
                 <hr>
                 <div id="daily-forecast">
                 </div>
-                
-              <!--
-              <div style="float:left">
-                <center><p> 5:30pm</p>
-                <img src="https://openweathermap.org/img/wn/01d@2x.png" class="weather-margin-top" alt="">
-                <p>22°</p></center>
-              </div>
-              <div style="float:left">
-                <center><p> 5:30pm</p>
-                <img src="https://openweathermap.org/img/wn/01d@2x.png" class="weather-margin-top" alt="">
-                <p>22°</p></center>
-              </div>
-              <div style="float:left">
-                <center><p> 5:30pm</p>
-                <img src="https://openweathermap.org/img/wn/01d@2x.png" class="weather-margin-top" alt="">
-                <p>22°</p></center>
-              </div>-->
-              
             </div>
           </form>
-        <!-- /.card-footer-->
       </div>
     </div>
-      <!-- /.card -->
 @endsection
-
 <script>
-
-
 var timer;
-function chk_me(){
- 
-   clearTimeout(timer);
-   timer=setTimeout(function validate(){
+function chk_me(){ 
+  clearTimeout(timer);
+  timer=setTimeout(function validate(){
     var query = $("#query").val();
     autoComplete(query);
-   },500);
+  },500);
 }
 
 async function getDining2() {
@@ -291,7 +260,7 @@ function getLocation() {
                     bodyRef.innerHTML = '';
                      
 
-                     
+
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(showPosition);
   } else { 
@@ -301,8 +270,7 @@ function getLocation() {
 
 function showPosition(position) {
   //position.coords.latitude;
-  //position.coords.longitude;
-  
+  //position.coords.longitude;  
   $("#loc-lat").val(position.coords.latitude);
                   $("#loc-long").val(position.coords.longitude);
   var search = 'll='+position.coords.latitude+'%2C'+position.coords.longitude;
@@ -318,131 +286,100 @@ function showPosition(position) {
                   $('#location').text(data.name);                    
                 }
             });
-
-
-
   $.ajax({
-                    url: '{{ route('fetchOpenWeatherLongLat') }}',
-                    method: "get",
-                    data: {
-                        lat: position.coords.latitude,
-                        long:position.coords.longitude,  
-                    },
-                    success: function(data){
-                      //$.each(data,function(index,screen){
-                        
-                        
-                        coord = data.weather.coord;
-                        
-                        coord = data.weather.coord;
-                        main = data.weather.main;
-                        wind = data.weather.wind;
+    url: '{{ route('fetchOpenWeatherLongLat') }}',
+    method: "get",
+    data: {
+        lat: position.coords.latitude,
+        long:position.coords.longitude,  
+    },
+    success: function(data){
+      //$.each(data,function(index,screen){
+        
+        
+        coord = data.weather.coord;
+        
+        coord = data.weather.coord;
+        main = data.weather.main;
+        wind = data.weather.wind;
 
-                        wind.speed;
-                        main.temp;
-                        main.humidity;
-                        weather = data.weather.weather;
-                        
-                        var weather2 = Object.values(weather);
-                        imgUrl='https://openweathermap.org/img/wn/'+weather2[0].icon+'@2x.png';
-                        //alert(imgUrl);
-                       // $("#img-weather").attr("src",imgUrl);
-                       
-                       $("#location-weather").text(parseInt(main.temp));
-                       $("#location-weather").append(String.fromCharCode(176));
-                       $("#div-weather").css('display','block');
-                       $("#location-heat-index").text('Heat index: '+ parseInt(main.feels_like));
-                       $("#location-heat-index").append(String.fromCharCode(176));
-                        $("#location-humidity").text('Heat index: '+main.humidity+'%');
-                        $("#location-wind-speed").text('Wind: '+main.feels_like+' km/h');
-
-
-                      forecast = data.forecast.list;
-
-                      //alert(forecast[0].main.temp);
-                      //alert(forecast[0].weather[0].icon);
-                      var html ='';
-                      var html2='';
-                      const daysOfWeek = ["Mon","Tue","Wed","Thurs","Fri","Sat","Sun"];
-                      for(var i=0;i<5;i++){
-
-                        var dt = forecast[i].dt;
-                        dt = new Date(dt*1000);
-                        
-                        let ampm = dt.getHours()>=12 ? 'pm' : 'am';;
-                        let hours = dt.getHours()%12;
-                        let minutes = dt.getMinutes();
-                        //let day = dt.getDay();
-                        hours = hours % 12;
-                        hours = hours ? hours : 12;
-                        
-                        hours = hours < 10 ? '0'+hours : hours;
-                        minutes = minutes<10 ? '0'+minutes :minutes;
-                        //let minute = dt.getMinutes();
-                        forecastIcon = forecast[i].weather[0].icon;
-                        //alert(forecast[i].main.temp);
-                        html+='<div style="float:left;width:20%"><center><p > '+hours+':'+minutes+' '+ampm+'</p>';
-                        html+='<img style="width:5vw;height:10vh" src="https://openweathermap.org/img/wn/'+forecastIcon+'@2x.png" class="weather-margin-top responsive" alt="">';
-                        html+='<p class="weather-margin-top2">'+parseInt(forecast[i].main.temp)+'°</p>';
-                        html+='</center></div>';
-                        
-                
-                
-               
-                        //alert(html);
-
-                        daily = data.daily;
-                              //alert(daily.daily[i+1].temp.day);
-                        
-                        var today = daily.daily[i+1].dt;
-                          //alert(today);
-                        
-                        var dt2= new Date(today*1000);
-                        let day = dt2.getDay();
-                        //day = 0,1,2,3,4,5,6
-                        
-                        rainChance = daily.daily[i+1].pop*100;
-                        dailyIcon = daily.daily[i+1].weather[0].icon;
-                        //alert(rainChance)
-                        html2+='<div style="float:left;width:20%"><center><p > '+daysOfWeek[day]+'</p>';
-                        html2+='<img style="width:5vw;height:10vh" src="https://openweathermap.org/img/wn/'+dailyIcon+'@2x.png" class="weather-margin-top responsive" alt="">';
-                        html2+='<p class="weather-margin-top2">'+parseInt(daily.daily[i].temp.day)+'°</p>';
-                        html2+='<p class=""> Rain: '+parseInt(rainChance)+'%</p></center></div>';
+        wind.speed;
+        main.temp;
+        main.humidity;
+        weather = data.weather.weather;
+        
+        var weather2 = Object.values(weather);
+        imgUrl='https://openweathermap.org/img/wn/'+weather2[0].icon+'@2x.png';
+        //alert(imgUrl);
+        // $("#img-weather").attr("src",imgUrl);
+        
+        $("#location-weather").text(parseInt(main.temp));
+        $("#location-weather").append(String.fromCharCode(176));
+        $("#div-weather").css('display','block');
+        $("#location-heat-index").text('Heat index: '+ parseInt(main.feels_like));
+        $("#location-heat-index").append(String.fromCharCode(176));
+        $("#location-humidity").text('Heat index: '+main.humidity+'%');
+        $("#location-wind-speed").text('Wind: '+main.feels_like+' km/h');
 
 
-                      }
-                      //alert(html2);
-                        $('#weather-forecast').append(html);
-                        $('#daily-forecast').append(html2);
-                        //$('#main-div').animate({height:'90vh'}, 500);
-                      //$("#main-div").css('height','90vh');
-                      
-                      $( "#main-div" ).animate({
-                      //width: "300px",
-                      height: "90vh", 
-                        }, 1000 );
-                        $("#pageloader").fadeOut();
-                        $('#img-weather').attr('src', imgUrl).load(function(){
-                          //  this.width;   // Note: $(this).width() will not work for in memory images
+      forecast = data.forecast.list;
 
-                        });
-                        
-                        
-                        $("#pageloader").fadeOut();
-                       
+      //alert(forecast[0].main.temp);
+      //alert(forecast[0].weather[0].icon);
+      var html ='';
+      var html2='';
+      const daysOfWeek = ["Mon","Tue","Wed","Thurs","Fri","Sat","Sun"];
+      for(var i=0;i<5;i++){
 
-                        //alert(weather2[0].description);
-                        //$('#weather-desc').text(weath.description);
-
-                        
-                       // $("#screenname").append('<option value="' +screen.coord + '">' +screen.coord +'</option>');
-                    //}); // where html is the key of array that you want, $response['html'] = "<a>something..</a>";
-                    },
-                    error: function(data){
-                      var json = $.parseJSON(data);
-                      alert(json.error);
-                    } 
-                  });
+        var dt = forecast[i].dt;
+        dt = new Date(dt*1000);
+        
+        let ampm = dt.getHours()>=12 ? 'pm' : 'am';;
+        let hours = dt.getHours()%12;
+        let minutes = dt.getMinutes();
+        //let day = dt.getDay();
+        hours = hours % 12;
+        hours = hours ? hours : 12;
+        
+        hours = hours < 10 ? '0'+hours : hours;
+        minutes = minutes<10 ? '0'+minutes :minutes;
+        //let minute = dt.getMinutes();
+        forecastIcon = forecast[i].weather[0].icon;
+        //alert(forecast[i].main.temp);
+        html+='<div style="float:left;width:20%"><center><p > '+hours+':'+minutes+' '+ampm+'</p>';
+        html+='<img style="width:5vw;height:10vh" src="https://openweathermap.org/img/wn/'+forecastIcon+'@2x.png" class="weather-margin-top responsive" alt="">';
+        html+='<p class="weather-margin-top2">'+parseInt(forecast[i].main.temp)+'°</p>';
+        html+='</center></div>';
+        //alert(html);
+        daily = data.daily;
+        var today = daily.daily[i+1].dt;
+        var dt2= new Date(today*1000);
+        let day = dt2.getDay();
+        rainChance = daily.daily[i+1].pop*100;
+        dailyIcon = daily.daily[i+1].weather[0].icon;
+        //alert(rainChance)
+        html2+='<div style="float:left;width:20%"><center><p > '+daysOfWeek[day]+'</p>';
+        html2+='<img style="width:5vw;height:10vh" src="https://openweathermap.org/img/wn/'+dailyIcon+'@2x.png" class="weather-margin-top responsive" alt="">';
+        html2+='<p class="weather-margin-top2">'+parseInt(daily.daily[i].temp.day)+'°</p>';
+        html2+='<p class=""> Rain: '+parseInt(rainChance)+'%</p></center></div>';
+      }
+      //alert(html2);
+        $('#weather-forecast').append(html);
+        $('#daily-forecast').append(html2);
+      $( "#main-div" ).animate({
+      //width: "300px",
+          height: "90vh", 
+      }, 1000 );
+      $("#pageloader").fadeOut();
+      $('#img-weather').attr('src', imgUrl).load(function(){
+      });
+        $("#pageloader").fadeOut();
+    },
+    error: function(data){
+      var json = $.parseJSON(data);
+      alert(json.error);
+    } 
+  });
 }
 async function getDining(catcat) {
   $("#pageloader").fadeIn();
